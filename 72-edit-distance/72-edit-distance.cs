@@ -18,9 +18,7 @@ public class Solution
         {
             for (int j = 1; j <= word1.Length; ++j)
             {
-                int transitionCost = word1[j - 1] == word2[i - 1] ? 0 : 1;
-
-                db[i, j] = Math.Min(db[i - 1, j] + 1, Math.Min(db[i, j - 1] + 1, db[i - 1, j - 1] + transitionCost));
+                db[i, j] = Math.Min(db[i - 1, j] + 1, Math.Min(db[i, j - 1] + 1, db[i - 1, j - 1] + (word1[j - 1] == word2[i - 1] ? 0 : 1)));
             }
         }
 
