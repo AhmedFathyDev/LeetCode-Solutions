@@ -35,6 +35,6 @@ public class Solution
             l2 = l2 == null ? null : l2.next;
         }
 
-        return sumList.next ?? sumList;
+        return sumList.next;
     }
 }
