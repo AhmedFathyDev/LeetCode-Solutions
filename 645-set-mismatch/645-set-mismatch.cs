@@ -5,14 +5,14 @@ public class Solution {
         var numMissed = 0;
         var numOccuredTwice = 0;
 
-        foreach (var t in nums)
+        foreach (var num in nums)
         {
-            if (freqNums[t] == 1)
+            if (freqNums[num] == 1)
             {
-                numOccuredTwice = t;
+                numOccuredTwice = num;
             }
 
-            freqNums[t]++;
+            freqNums[num]++;
         }
 
         for (var i = 1; i <= nums.Length; ++i)
