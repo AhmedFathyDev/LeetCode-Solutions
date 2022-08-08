@@ -6,12 +6,13 @@ public class Solution {
         Array.Sort(sortedNums);
 
         var maxNums = new List<int>();
-        var subNums = new List<int>();
         
         for (var i = sortedNums.Length - k; i < sortedNums.Length; ++i)
         {
             maxNums.Add(sortedNums[i]);
         }
+        
+        var subNums = new List<int>();
 
         foreach (var num in nums)
         {
