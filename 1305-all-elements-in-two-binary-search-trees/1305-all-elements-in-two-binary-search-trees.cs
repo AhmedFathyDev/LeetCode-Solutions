@@ -13,10 +13,7 @@
  */
 public class Solution {
     public IList<int> GetAllElements(TreeNode root1, TreeNode root2) {
-        var list1 = new List<int>();
-        var list2 = new List<int>();
-
-        void InOrder(TreeNode? root, List<int> list)
+        void InOrder(TreeNode? root, ICollection<int> list)
         {
             if (root is null)
             {
@@ -29,13 +26,40 @@ public class Solution {
 
             InOrder(root.right, list);
         }
+        
+        var list1 = new List<int>();
+        var list2 = new List<int>();
+        var list = new List<int>();
 
         InOrder(root1, list1);
         InOrder(root2, list2);
 
-        list1.AddRange(list2);
-        list1.Sort();
+        while (list1.Count > 0 && list2.Count > 0)
+        {
+            if (list1.First() < list2.First())
+            {
+                list.Add(list1.First());
+                list1 = list1.Skip(1).ToList();
+            }
+            else
+            {
+                list.Add(list2.First());
+                list2 = list2.Skip(1).ToList();
+            }
+        }
 
-        return list1;
+        while (list1.Count > 0)
+        {
+            list.Add(list1.First());
+            list1 = list1.Skip(1).ToList();
+        }
+        
+        while (list2.Count > 0)
+        {
+            list.Add(list2.First());
+            list2 = list2.Skip(1).ToList();
+        }
+
+        return list;
     }
 }
