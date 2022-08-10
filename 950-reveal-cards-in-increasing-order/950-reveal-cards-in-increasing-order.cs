@@ -14,8 +14,8 @@ public class Solution {
         {
             answerOrder[indices.Dequeue()] = card;
 
-            if (indices.Count <= 0) continue;
-            
+            if (indices.Count <= 0) break;
+
             indices.Enqueue(indices.Dequeue());
         }
 
