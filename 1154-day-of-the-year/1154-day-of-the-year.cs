@@ -14,19 +14,16 @@ public class Solution {
         var month = int.Parse(dateArr[1]);
         var day = int.Parse(dateArr[2]);
         
-        var isLeap = CheckYear(year);
-        
         var numberOfDays = 0;
         int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         
-        for (var i = 0; i < month - 1; ++i)
+        if (CheckYear(year))
         {
-            if (isLeap && i == 1)
-            {
-                numberOfDays += days[i] + 1;
-                continue;
-            }
-            
+            days[1] = 29;
+        }
+        
+        for (var i = 0; i < month - 1; ++i)
+        {   
             numberOfDays += days[i];
         }
         
