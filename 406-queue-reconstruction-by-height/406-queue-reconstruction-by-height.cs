@@ -2,7 +2,8 @@ public class Solution
 {
     public int[][] ReconstructQueue(int[][] people)
     {
-        Array.Sort(people, (x, y) => x[0] == y[0] ? x[1] - y[1] : y[0] - x[0]);
+        Array.Sort(people,
+            (personX, personY) => personX[0] == personY[0] ? personX[1] - personY[1] : personY[0] - personX[0]);
 
         var ans = new List<int[]>();
 
