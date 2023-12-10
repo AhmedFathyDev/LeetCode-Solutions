@@ -16,11 +16,8 @@ public:
         for (int i = 0; i < nums_size; ++i)
             if (!zeros)
                 nums[i] = product / nums[i];
-            else if (zeros == 1)
-                if (nums[i])
-                    nums[i] = 0;
-                else
-                    nums[i] = product;
+            else if (zeros == 1 && !nums[i])
+                nums[i] = product;
             else
                 nums[i] = 0;
 
