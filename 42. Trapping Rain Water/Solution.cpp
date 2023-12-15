@@ -8,29 +8,29 @@ public:
         int i = 0;
         int j = height.size() - 1;
 
-        int max_left = 0;
-        int max_right = 0;
+        int max_i = 0;
+        int max_j = 0;
 
-        while (i <= j)
+        while (i < j)
             if (height[i] <= height[j])
             {
-                if (height[i] >= max_left)
-                    max_left = height[i];
+                if (max_i <= height[i])
+                    max_i = height[i];
                 else
-                    water_units += max_left - height[i];
+                    water_units += max_i - height[i];
 
                 ++i;
             }
             else
             {
-                if (height[j] >= max_right)
-                    max_right = height[j];
+                if (max_j <= height[j])
+                    max_j = height[j];
                 else
-                    water_units += max_right - height[j];
+                    water_units += max_j - height[j];
 
                 --j;
             }
-        
+
         return water_units;
     }
 };
