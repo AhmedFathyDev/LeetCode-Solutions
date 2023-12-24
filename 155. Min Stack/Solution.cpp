@@ -13,17 +13,17 @@ private:
 public:
     void push(int val)
     {
-        Element *new_element = new Element;
-        new_element->val = val;
-        new_element->next_element = top_element;
-        top_element = new_element;
+        Element *new_top_element = new Element;
+        new_top_element->val = val;
+        new_top_element->next_element = top_element;
+        top_element = new_top_element;
 
         if (min_element == NULL || val <= getMin())
         {
-            Element *new_element = new Element;
-            new_element->val = val;
-            new_element->next_element = min_element;
-            min_element = new_element;
+            Element *new_min_element = new Element;
+            new_min_element->val = val;
+            new_min_element->next_element = min_element;
+            min_element = new_min_element;
         }
     }
 
@@ -51,3 +51,12 @@ public:
         return min_element->val;
     }
 };
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
