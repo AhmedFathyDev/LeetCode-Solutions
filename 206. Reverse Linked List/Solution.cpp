@@ -6,11 +6,11 @@ public:
         if (head == nullptr || head->next == nullptr)
             return head;
 
-        ListNode *temp_list = reverseList(head->next);
+        ListNode *new_head = reverseList(head->next);
 
         head->next->next = head;
         head->next = nullptr;
 
-        return temp_list;
+        return new_head;
     }
 };
