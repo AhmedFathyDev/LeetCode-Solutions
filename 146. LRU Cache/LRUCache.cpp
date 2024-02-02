@@ -80,7 +80,7 @@ public:
 
     int get(int key)
     {
-        if (!cache[key])
+        if (!cache.count(key))
             return -1;
 
         put_head(key);
