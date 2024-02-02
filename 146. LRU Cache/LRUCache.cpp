@@ -1,12 +1,12 @@
-struct node
+struct list_node
 {
     int key;
     int value;
 
-    node *prev;
-    node *next;
+    list_node *prev;
+    list_node *next;
 
-    node(int key, int value) : key(key), value(value), prev(NULL), next(NULL) {}
+    list_node(int key, int value) : key(key), value(value), prev(NULL), next(NULL) {}
 };
 
 class LRUCache
@@ -14,13 +14,13 @@ class LRUCache
 private:
     size_t capacity;
 
-    node *head;
-    node *tail;
+    list_node *head;
+    list_node *tail;
 
     size_t cache_length;
-    map<int, node *> cache;
+    map<int, list_node *> cache;
 
-    void put_head(node *new_head)
+    void put_head(list_node *new_head)
     {
         if (head)
         {
@@ -60,7 +60,7 @@ private:
         head = NULL;
     }
 
-    void update_key_location(int key)
+    void put_head(int key)
     {
         if (cache[key] != head)
         {
@@ -83,7 +83,7 @@ public:
         if (!cache[key])
             return -1;
 
-        update_key_location(key);
+        put_head(key);
         return cache[key]->value;
     }
 
@@ -92,15 +92,15 @@ public:
         if (cache[key])
         {
             cache[key]->value = value;
-            update_key_location(key);
+            put_head(key);
             return;
         }
 
         ++cache_length;
-        node *new_node = new node(key, value);
-        cache[key] = new_node;
+        list_node *new_list_node = new list_node(key, value);
+        cache[key] = new_list_node;
 
-        put_head(new_node);
+        put_head(new_list_node);
 
         if (cache_length > capacity)
             delete_tail();
