@@ -20,6 +20,21 @@ private:
     size_t cache_length;
     map<int, list_node *> cache;
 
+    void put_head(int key)
+    {
+        if (cache[key] != head)
+        {
+            cache[key]->prev->next = cache[key]->next;
+
+            if (cache[key] == tail)
+                tail = tail->prev;
+            else
+                cache[key]->next->prev = cache[key]->prev;
+
+            put_head(cache[key]);
+        }
+    }
+
     void put_head(list_node *new_head)
     {
         if (head)
@@ -58,21 +73,6 @@ private:
 
         tail = NULL;
         head = NULL;
-    }
-
-    void put_head(int key)
-    {
-        if (cache[key] != head)
-        {
-            cache[key]->prev->next = cache[key]->next;
-
-            if (cache[key] == tail)
-                tail = tail->prev;
-            else
-                cache[key]->next->prev = cache[key]->prev;
-
-            put_head(cache[key]);
-        }
     }
 
 public:
