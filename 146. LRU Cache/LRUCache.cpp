@@ -17,45 +17,41 @@ private:
     list_node *head;
     list_node *tail;
 
-    size_t cache_length;
+    size_t list_length;
     map<int, list_node *> cache;
 
     void put_head(int key)
     {
-        if (cache[key] != head)
+        if (cache[key] == head)
+            return;
+
+        if (!head)
         {
-            cache[key]->prev->next = cache[key]->next;
-
-            if (cache[key] == tail)
-                tail = tail->prev;
-            else
-                cache[key]->next->prev = cache[key]->prev;
-
-            put_head(cache[key]);
-        }
-    }
-
-    void put_head(list_node *new_head)
-    {
-        if (head)
-        {
-            new_head->prev = NULL;
-
-            new_head->next = head;
-            head->prev = new_head;
-
-            head = new_head;
-
+            head = cache[key];
+            tail = cache[key];
             return;
         }
 
-        head = new_head;
-        tail = new_head;
+        if (cache[key]->prev)
+            cache[key]->prev->next = cache[key]->next;
+
+        if (cache[key]->next)
+            cache[key]->next->prev = cache[key]->prev;
+
+        if (cache[key] == tail)
+            tail = cache[key]->prev;
+
+        cache[key]->prev = NULL;
+        cache[key]->next = head;
+
+        head->prev = cache[key];
+        head = cache[key];
     }
 
     void delete_tail(void)
     {
-        --cache_length;
+        --list_length;
+
         cache[tail->key] = NULL;
         cache.erase(tail->key);
 
@@ -76,7 +72,7 @@ private:
     }
 
 public:
-    LRUCache(int capacity) : capacity(capacity), head(NULL), tail(NULL), cache_length(0) {}
+    LRUCache(int capacity) : capacity(capacity), head(NULL), tail(NULL), list_length(0) {}
 
     int get(int key)
     {
@@ -92,17 +88,17 @@ public:
         if (cache[key])
         {
             cache[key]->value = value;
+
             put_head(key);
             return;
         }
 
-        ++cache_length;
-        list_node *new_list_node = new list_node(key, value);
-        cache[key] = new_list_node;
+        ++list_length;
+        cache[key] = new list_node(key, value);
 
-        put_head(new_list_node);
+        put_head(key);
 
-        if (cache_length > capacity)
+        if (list_length > capacity)
             delete_tail();
     }
 };
