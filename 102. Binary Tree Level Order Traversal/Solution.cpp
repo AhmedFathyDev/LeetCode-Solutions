@@ -9,11 +9,11 @@ private:
             return;
 
         vector<TreeNode *> children_nodes;
-        vector<int> level;
+        vector<int> level_vals;
 
         for (auto node : level_nodes)
         {
-            level.push_back(node->val);
+            level_vals.push_back(node->val);
 
             if (node->left)
                 children_nodes.push_back(node->left);
@@ -22,7 +22,7 @@ private:
                 children_nodes.push_back(node->right);
         }
 
-        levels.push_back(level);
+        levels.push_back(level_vals);
         level_order(children_nodes);
     }
 
