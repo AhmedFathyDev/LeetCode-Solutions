@@ -11,7 +11,7 @@ private:
             for (int i = start; i < nums.size(); ++i)
             {
                 newSubsets.push_back(nums[i]);
-                backtrack(possibleSubsets, newSubsets, nums, remain - nums[i], i);
+                backtrack(possibleSubsets, newSubsets, nums, remain - nums[i], I); // not i + 1 because we can reuse same elements
                 newSubsets.pop_back();
             }
     }
