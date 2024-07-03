@@ -8,7 +8,7 @@ private:
         else
             for (int i = 0; i < nums.size(); ++i)
             {
-                if (used[i] || i > 0 && nums[i] == nums[i - 1] && !used[i - 1])
+                if (used[i] || (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]))
                     continue;
 
                 used[i] = true;
