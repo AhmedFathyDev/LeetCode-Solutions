@@ -1,10 +1,25 @@
 class Solution
 {
-public:
-    vector<string> letterCombinations(string digits)
+private:
+    void backtrack(const string digits, const string mapping[], const string newCombination, const int index, vector<string> &possibleCombinations)
     {
+        if (index == digits.length())
+        {
+            possibleCombinations.push_back(newCombination);
+            return;
+        }
+
+        for (char ch : mapping[digits[index] - '0'])
+            backtrack(digits, mapping, newCombination + ch, index + 1, possibleCombinations);
+    }
+
+public:
+    vector<string> letterCombinations(const string digits)
+    {
+        vector<string> possibleCombinations;
+
         if (!digits.length())
-            return {};
+            return possibleCombinations;
 
         string mapping[] = {"",
                             "",
@@ -17,24 +32,7 @@ public:
                             "tuv",
                             "wxyz"};
 
-        queue<string> answers;
-
-        answers.push("");
-
-        while (answers.front().length() != digits.length())
-        {
-            string remove = answers.front();
-            answers.pop();
-
-            for (char ch : mapping[digits[remove.length()] - '0'])
-                answers.push(remove + ch);
-        }
-
-        vector<string> possibleAnswers;
-
-        while (answers.size())
-            possibleAnswers.push_back(answers.front()), answers.pop();
-
-        return possibleAnswers;
+        backtrack(digits, mapping, "", 0, possibleCombinations);
+        return possibleCombinations;
     }
 };
