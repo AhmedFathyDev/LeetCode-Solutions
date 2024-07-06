@@ -3,7 +3,7 @@ class Solution
 public:
     vector<string> letterCombinations(string digits)
     {
-        if (!digits.size())
+        if (!digits.length())
             return {};
 
         string mapping[] = {"",
@@ -26,8 +26,8 @@ public:
             string remove = answers.front();
             answers.pop();
 
-            for (char c : mapping[digits[remove.length()] - '0'])
-                answers.push(remove + c);
+            for (char ch : mapping[digits[remove.length()] - '0'])
+                answers.push(remove + ch);
         }
 
         vector<string> possibleAnswers;
